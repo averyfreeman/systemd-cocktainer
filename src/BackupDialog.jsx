@@ -25,6 +25,7 @@ import DISPATCH_SH from './pull-backup/dispatch.sh';
 import PRE_SNAPSHOT_SH from './pull-backup/pre-snapshot.sh';
 import SNAPSHOT_DB_SH from './pull-backup/snapshot-db.sh';
 import RESTORE_AFTER_BACKUP_SH from './pull-backup/restore-after-backup.sh';
+import LIST_CAPABILITIES_SH from './pull-backup/list-capabilities.sh';
 
 const { gettext: _, format } = cockpit;
 
@@ -593,10 +594,12 @@ export function BackupDialog({ machineName, onClose, onAddNotification }) {
         await cockpit.file(`${PULL_DIR}/pre-snapshot.sh`, { superuser: 'require' }).replace(PRE_SNAPSHOT_SH);
         await cockpit.file(`${PULL_DIR}/snapshot-db.sh`, { superuser: 'require' }).replace(SNAPSHOT_DB_SH);
         await cockpit.file(`${PULL_DIR}/restore-after-backup.sh`, { superuser: 'require' }).replace(RESTORE_AFTER_BACKUP_SH);
+        await cockpit.file(`${PULL_DIR}/list-capabilities.sh`, { superuser: 'require' }).replace(LIST_CAPABILITIES_SH);
         await cockpit.spawn(
             ['chmod', '755',
                 `${PULL_DIR}/dispatch.sh`, `${PULL_DIR}/pre-snapshot.sh`,
-                `${PULL_DIR}/snapshot-db.sh`, `${PULL_DIR}/restore-after-backup.sh`],
+                `${PULL_DIR}/snapshot-db.sh`, `${PULL_DIR}/restore-after-backup.sh`,
+                `${PULL_DIR}/list-capabilities.sh`],
             { superuser: 'require' }
         );
 

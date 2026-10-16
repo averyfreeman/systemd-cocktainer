@@ -34,6 +34,7 @@ rm -rf %{buildroot}%{_datadir}/cockpit/nspawn/pull-backup
 install -d %{buildroot}/usr/local/lib/nspawn-pull
 install -m755 pull-backup/dispatch.sh pull-backup/pre-snapshot.sh \
     pull-backup/snapshot-db.sh pull-backup/restore-after-backup.sh \
+    pull-backup/list-capabilities.sh \
     %{buildroot}/usr/local/lib/nspawn-pull/
 
 %files
@@ -44,6 +45,7 @@ install -m755 pull-backup/dispatch.sh pull-backup/pre-snapshot.sh \
 /usr/local/lib/nspawn-pull/pre-snapshot.sh
 /usr/local/lib/nspawn-pull/snapshot-db.sh
 /usr/local/lib/nspawn-pull/restore-after-backup.sh
+/usr/local/lib/nspawn-pull/list-capabilities.sh
 
 %post
 # rrsync ships only as a doc file in the rsync package on most distros -
