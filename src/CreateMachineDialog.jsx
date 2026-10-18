@@ -710,6 +710,10 @@ export function CreateMachineDialog({ images, onClose, onRefresh, onAddNotificat
             if (autoEnable) {
                 append(`\n=== Aktiverar autostart för ${name} ===\n`);
                 await spawnMachinectl(['enable', name]).stream(append);
+                // machines.target itself must be enabled too, or none of the
+                // individually-enabled systemd-nspawn@*.service units are ever
+                // pulled in at boot — see app.jsx's autostart-enable handler.
+                await cockpit.spawn(['systemctl', 'enable', 'machines.target'], { superuser: 'require', err: 'out' }).stream(append);
             }
 
             // Step 7: fix SELinux contexts (debootstrap leaves files unlabelled)

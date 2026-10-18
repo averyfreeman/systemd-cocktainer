@@ -95,6 +95,10 @@ export function MachineActions({ machine, isAutostart, onAction, onAddNotificati
             if (isAutostart) {
                 await cockpit.spawn(['machinectl', 'disable', name], { superuser: 'require', err: 'ignore' }).catch(() => {});
                 await cockpit.spawn(['machinectl', 'enable', newName], { superuser: 'require', err: 'ignore' }).catch(() => {});
+                // machines.target itself must be enabled too, or none of the
+                // individually-enabled systemd-nspawn@*.service units are ever
+                // pulled in at boot — see app.jsx's autostart-enable handler.
+                await cockpit.spawn(['systemctl', 'enable', 'machines.target'], { superuser: 'require', err: 'ignore' }).catch(() => {});
             }
             await cockpit.spawn(['systemctl', 'daemon-reload'], { superuser: 'require' });
             // Clear failed states left over from the old unit names
