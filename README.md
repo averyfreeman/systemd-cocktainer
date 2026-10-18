@@ -199,7 +199,7 @@ That said:
 
 If this module helps you, wonderful. If something breaks, please do not come after me — I have enough on my plate. You are a sysadmin, you know how to read logs.
 
-That said, if you find it useful and want to build on it, fork it and make it your own. The world needs more nspawn tooling.
+If you just want to complain, fork it and make it your own — the world needs more nspawn tooling, and your fork can do things exactly your way. But if you show up with a well-written bug report, a genuinely useful idea, or feedback that's actually constructive — and you're not a jerk about it — I'm happy to talk, and maybe even fix it myself. Nice people get nice collaboration.
 
 ## Why nspawn?
 
