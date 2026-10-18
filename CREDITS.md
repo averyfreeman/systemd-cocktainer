@@ -5,6 +5,18 @@ We are grateful to their authors and contributors.
 
 ---
 
+## systemd-nspawn
+**https://systemd.io**
+License: LGPL-2.1-or-later
+
+The container technology this entire module exists to manage. `systemd-nspawn` was created
+by Lennart Poettering in March 2011 ("a simple chroot(1) like tool to execute commands in a
+namespace container") and has been developed by the systemd project ever since. Ships with
+every modern systemd-based Linux distribution — no daemon, full systemd support inside the
+container.
+
+---
+
 ## Cockpit
 **https://cockpit-project.org**
 License: LGPL-2.1-or-later
