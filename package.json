@@ -6,20 +6,27 @@
   "license": "LGPL-2.1",
   "scripts": {
     "build": "node build.js",
-    "watch": "node build.js --watch"
+    "watch": "node build.js --watch",
+    "lint": "oxlint src/"
   },
   "dependencies": {
-    "@patternfly/patternfly": "6.4.0",
-    "@patternfly/react-core": "6.4.1",
-    "@patternfly/react-icons": "6.4.0",
-    "@patternfly/react-table": "6.4.1",
+    "@patternfly/patternfly": "6.7.0",
+    "@patternfly/react-core": "6.7.0",
+    "@patternfly/react-icons": "6.7.0",
+    "@patternfly/react-table": "6.7.0",
     "@xterm/addon-webgl": "0.19.0",
     "@xterm/xterm": "6.0.0",
     "argparse": "2.0.1",
-    "esbuild": "0.27.3",
+    "esbuild": "0.28.2",
     "esbuild-sass-plugin": "3.6.0",
-    "gettext-parser": "9.0.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "gettext-parser": "10.0.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "oxlint": "1.90.0"
   }
 }

@@ -7,9 +7,14 @@ import process from 'node:process';
 
 import { sassPlugin } from 'esbuild-sass-plugin';
 
-import { cleanPlugin } from './pkg/lib/esbuild-cleanup-plugin.js';
-import { cockpitCompressPlugin } from './pkg/lib/esbuild-compress-plugin.js';
-import { cockpitPoEsbuildPlugin } from './pkg/lib/cockpit-po-plugin.js';
+const localPkgLib = new URL('./pkg/lib/', import.meta.url);
+const workspacePkgLib = new URL('../../cockpit/pkg/lib/', import.meta.url);
+const pkgLib = fs.existsSync(new URL('cockpit-po-plugin.js', workspacePkgLib)) ? workspacePkgLib : localPkgLib;
+const [{ cleanPlugin }, { cockpitCompressPlugin }, { cockpitPoEsbuildPlugin }] = await Promise.all([
+    import(new URL('esbuild-cleanup-plugin.js', pkgLib)),
+    import(new URL('esbuild-compress-plugin.js', pkgLib)),
+    import(new URL('cockpit-po-plugin.js', pkgLib)),
+]);
 
 const { default: esbuild } = await import('esbuild');
 
@@ -17,7 +22,7 @@ const watch = process.argv.includes('--watch');
 const production = !watch;
 
 // pkg/lib innehåller cockpit.js, patternfly/patternfly-6-cockpit.scss m.m.
-const nodePaths = ['pkg/lib'];
+const nodePaths = [fs.existsSync(new URL('../../cockpit/pkg/lib', import.meta.url)) ? '../../cockpit/pkg/lib' : 'pkg/lib'];
 
 const context = await esbuild.context({
     entryPoints: ['src/index.js'],
